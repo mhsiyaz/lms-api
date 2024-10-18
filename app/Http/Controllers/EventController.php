@@ -21,21 +21,21 @@ class EventController extends Controller
     public function createEvent(Request $request,$userid,$eventid): \Illuminate\Http\JsonResponse
     {
         $event = new Event();
-        $event->user_id = $userid;
-        $event->event_id = $eventid;
+        $event->userid = $userid;
+        $event->id = $eventid;
         $event->fill($request->all());
         $event->save();
         return response()->json(['message' => 'Event created']);
     }
     public function updateEvent(Request $request, $userid,$eventid): \Illuminate\Http\JsonResponse
     {
-        $event = Event::where('user_id', $userid)->where('id', $eventid)->firstOrFail();
+        $event = Event::where('userid', $userid)->where('id', $eventid)->firstOrFail();
         $event->update($request->all());
         return response()->json(['message' => 'Event updated']);
     }
     public function deleteEvent(Request $request, $userid,$eventid): \Illuminate\Http\JsonResponse
     {
-        $event = Event::where('user_id', $userid)->where('id', $eventid)->firstOrFail();
+        $event = Event::where('userid', $userid)->where('id', $eventid)->firstOrFail();
         $event->delete();
         return response()->json(['message' => 'Event deleted']);
     }
